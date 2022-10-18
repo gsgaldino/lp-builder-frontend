@@ -30,20 +30,28 @@ const pageSlice = createSlice({
     },
     deleteSectionSuccess: () => {},
     updateSection: (state, action) => {
-      const updated = action.payload;
-      const index = state.page.body.items.findIndex((s) => s._id === updated._id);
+      const { sectionId, data } = action.payload;
+      const index = state.page.body.items.findIndex((s) => s._id === sectionId);
 
-      state.page.body.items[index] = updated;
+      state.page.body.items[index] = data;
     },
     createElement: (state, action) => {
       const { sectionId, element } = action.payload;
-
       const index = state.page.body.items.findIndex((s) => s._id === sectionId);
 
       state.page.body.items[index].elements.push({
         _id: v4(),
         ...element,
       });
+    },
+    deleteElement: (state, action) => {
+      const data = action.payload;
+      const sectionIndex = state.page.body.items.findIndex((s) => s._id === data.sectionId);
+      const itemIndex = state.page.body.items[sectionIndex].elements.findIndex(
+        (s) => s._id === data._id,
+      );
+
+      state.page.body.items[sectionIndex].elements.splice(itemIndex, 1);
     },
   },
 });
@@ -58,4 +66,5 @@ export const {
   createElement,
   updatePageSuccess,
   updateSection,
+  deleteElement,
 } = pageSlice.actions;

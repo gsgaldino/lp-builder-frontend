@@ -30,7 +30,7 @@ const GlobalStyles = createGlobalStyle`
     --spacement-x-large: 33px;
 
     /* radius */
-    --radius-default: 4px;
+    --radius-default: 3px;
   }
   
   * {

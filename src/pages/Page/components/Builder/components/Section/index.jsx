@@ -65,7 +65,7 @@ Section.propTypes = {
     css: PropTypes.object,
     spaces: PropTypes.number,
     _id: PropTypes.string,
-    elements: PropTypes.object,
+    elements: PropTypes.array,
   }).isRequired,
 };
 

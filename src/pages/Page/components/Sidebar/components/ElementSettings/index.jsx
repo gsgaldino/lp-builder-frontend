@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Button } from 'components';
 
 import BackButton from '../BackButton';
+import ModalDeleteItem from './components/ModalDeleteItem';
 
 import * as S from './styles';
 
 function ElementSettings() {
   const { elementSettings } = useSelector((s) => s.sidebar);
-  const [data, setData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    setData(elementSettings.data);
-  }, [elementSettings]);
+  const onDelete = () => setIsModalOpen(true);
 
   return (
     <S.Container>
@@ -22,8 +22,16 @@ function ElementSettings() {
       </S.Title>
 
       <S.Content>
-        <p>{data.type}</p>
+        <p>{elementSettings?.data.type}</p>
+
+        <Button onClick={onDelete}>Apagar item</Button>
       </S.Content>
+
+      <ModalDeleteItem
+        element={elementSettings?.data}
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+      />
     </S.Container>
   );
 }

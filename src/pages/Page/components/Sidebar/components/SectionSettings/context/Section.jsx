@@ -4,23 +4,25 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { updateSection } from 'store/modules/page/slice';
+import { updateSection } from 'store/modules/page/slice';
 
 const SectionContext = createContext();
 
 export default function SectionProvider({ children }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [data, setData] = useState({});
 
   const onChange = (value) => {
-    console.log('VALUE', value);
-    // const newData = { ...data, spaces: value };
+    const payload = {
+      sectionId: value._id,
+      data: value,
+    };
 
     // setData(newData);
 
-    // dispatch(updateSection(newData));
+    dispatch(updateSection(payload));
   };
 
   const state = useMemo(() => ({

@@ -11,7 +11,7 @@ import {
 
 import * as S from './styles';
 
-function Element({ element }) {
+function Element({ element, sectionId }) {
   const dispatch = useDispatch();
 
   const onClick = (e) => {
@@ -20,7 +20,10 @@ function Element({ element }) {
     dispatch(setIsOpen(true));
     dispatch(setShowSectionSettings(false));
     dispatch(setShowElementSettings(true));
-    dispatch(setElementData(element));
+    dispatch(setElementData({
+      ...element,
+      sectionId,
+    }));
   };
 
   return (
@@ -36,6 +39,7 @@ Element.propTypes = {
     type: PropTypes.string,
     index: PropTypes.number,
   }),
+  sectionId: PropTypes.string.isRequired,
 };
 
 Element.defaultProps = {

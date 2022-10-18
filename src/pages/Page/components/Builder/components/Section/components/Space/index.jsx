@@ -53,7 +53,7 @@ function Space({ index, sectionId, element }) {
   return (
     <div>
       {element.index ? (
-        <Element element={element} />
+        <Element element={element} sectionId={sectionId} />
       ) : (
         <S.Wrapper>
           <S.Container
